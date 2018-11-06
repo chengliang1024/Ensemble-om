@@ -1,98 +1,92 @@
 <template>
   <v-stepper v-model="e1">
-    <v-stepper-header>
+    <v-stepper-header style="font-size: large">
       <v-divider></v-divider>
-      <v-stepper-step :complete="e1 > 1" step="1">提交信息</v-stepper-step>
+      <v-stepper-step editable :complete="e1 > 1" step="1">提交信息</v-stepper-step>
       <v-divider></v-divider>
-      <v-stepper-step :complete="e1 > 2" step="2">复核信息</v-stepper-step>
+      <v-stepper-step editable :complete="e1 > 2" step="2">复核信息</v-stepper-step>
       <v-divider></v-divider>
     </v-stepper-header>
-
     <v-stepper-items>
       <v-stepper-content step="1">
-        <v-card class="mb-5" height="200px">
-          <v-form>
             <v-layout wrap>
-              <v-flex xs12 md1 lg1>
-                <v-subheader class="primary--text subheading">提交人:</v-subheader>
+              <v-flex xs12 md3 lg3>
+                <v-subheader class="class1">提交人:</v-subheader>
               </v-flex>
-              <v-flex md11 lg11>
-                <v-text-field class="primary--text mx-1" label="" disabled="false" name="title" v-model="flowInfo.flowCommitInfo.userId" single-line hide-details>
+              <v-flex md9 lg9>
+                <v-text-field class="primary--text mx-1 textBox" label="" disabled="false" name="title" v-model="flowInfo.flowCommitInfo.userId" single-line hide-details>
                 </v-text-field>
               </v-flex>
             </v-layout>
-            <v-divider></v-divider>
-            <v-layout row wrap>
-              <v-flex xs12 md1 lg1>
-                <v-subheader class="primary--text subheading">提交时间:</v-subheader>
+             <v-layout row wrap>
+              <v-flex xs12 md3 lg3>
+                <v-subheader class="class1">提交时间:</v-subheader>
               </v-flex>
-              <v-flex md11 lg11>
-                <v-text-field class="primary--text mx-1" label="" disabled="false" name="title" v-model="flowInfo.flowCommitInfo.tranTime" single-line hide-details>
+              <v-flex md9 lg9>
+                <v-text-field class="primary--text mx-1 textBox" label="" disabled="false" name="title" v-model="flowInfo.flowCommitInfo.tranTime" single-line hide-details>
                 </v-text-field>
               </v-flex>
             </v-layout>
-            <v-divider></v-divider>
 
             <v-layout row wrap>
-              <v-flex xs12 md1 lg1>
-                <v-subheader class="primary--text subheading">提交原因:</v-subheader>
+              <v-flex xs12 md3 lg3>
+                <v-subheader class="class1">提交原因:</v-subheader>
               </v-flex>
-              <v-flex md11 lg11>
-                <v-text-field class="primary--text mx-1" label="" disabled="false" name="title" v-model="flowInfo.flowCommitInfo.remark" single-line hide-details>
+              <v-flex md9 lg9>
+                <v-text-field class="primary--text mx-1 textBox" label="" disabled="false" name="title" v-model="flowInfo.flowCommitInfo.remark" single-line hide-details>
                 </v-text-field>
               </v-flex>
             </v-layout>
-            <v-divider></v-divider>
-          </v-form>
-        </v-card>
-        <v-btn color="primary" @click="e1 = 2">复核信息</v-btn>
-
+            <v-layout row wrap>
+              <v-flex xs12 md3 lg3>
+                <v-subheader class="class1">备注信息:</v-subheader>
+              </v-flex>
+              <v-flex md9 lg9>
+                <v-text-field class="primary--text mx-1 textBox" label="" disabled="false" name="title" single-line hide-details>
+                </v-text-field>
+              </v-flex>
+            </v-layout>
       </v-stepper-content>
       <v-stepper-content step="2">
-        <v-card height="200px" class="mb-5">
-          <v-form>
           <v-layout wrap>
-          <v-flex xs12 md1 lg1>
-            <v-subheader class="primary--text subheading">复核人:</v-subheader>
+          <v-flex xs12 md3 lg3>
+            <v-subheader class="class1">复核人:</v-subheader>
           </v-flex>
-          <v-flex md11 lg11>
-            <v-text-field class="primary--text mx-1" label="" disabled="false" name="title" v-model="checkInfo.userId" single-line hide-details>
+          <v-flex md9 lg9>
+            <v-text-field class="primary--text mx-1 textBox" label="" disabled="false" name="title" v-model="checkInfo.userId" single-line hide-details>
             </v-text-field>
           </v-flex>
         </v-layout>
-            <v-divider></v-divider>
         <v-layout row wrap>
-          <v-flex xs12 md1 lg1>
-            <v-subheader class="primary--text subheading">复核时间:</v-subheader>
+          <v-flex xs12 md3 lg3>
+            <v-subheader class="class1">复核日期:</v-subheader>
           </v-flex>
-          <v-flex md11 lg11>
-            <v-text-field class="primary--text mx-1" label="" disabled="false" name="title" v-model="checkInfo.date" value="2018/09/07" single-line hide-details>
+          <v-flex md9 lg9>
+            <v-text-field class="primary--text mx-1 textBox" label="" disabled="false" name="title" v-model="checkInfo.date" value="2018/09/07" single-line hide-details>
             </v-text-field>
           </v-flex>
         </v-layout>
-            <v-divider></v-divider>
         <v-layout row wrap>
-          <v-flex xs12 md1 lg1>
-            <v-subheader class="primary--text subheading">复核状态:</v-subheader>
+          <v-flex xs12 md3 lg3>
+            <v-subheader class="class1">复核状态:</v-subheader>
           </v-flex>
-          <v-flex md11 lg11>
-            <v-switch color="success" hide-details value="Y" :label="`${checkInfo.isApproved==='Y'?'通过':'驳回'}`" v-model="checkInfo.isApproved"></v-switch>
+          <v-flex md9 lg9>
+            <v-switch color="success" style="margin-top: 8px" hide-details value="Y" :label="`${checkInfo.isApproved==='Y'?'通过':'驳回'}`" v-model="checkInfo.isApproved"></v-switch>
           </v-flex>
         </v-layout>
-            <v-divider></v-divider>
         <v-layout row wrap>
-          <v-flex xs12 md1 lg1>
-            <v-subheader class="primary--text subheading">复核意见:</v-subheader>
+          <v-flex xs12 md3 lg3>
+            <v-subheader class="class1">复核意见:</v-subheader>
           </v-flex>
-          <v-flex md11 lg11>
-            <v-text-field class="primary--text mx-1" label="" name="title" v-model="checkInfo.remark" single-line hide-details>
+          <v-flex md7 lg7>
+            <v-text-field class="primary--text mx-1 textBox" label="" name="title" v-model="checkInfo.remark" single-line hide-details>
             </v-text-field>
           </v-flex>
+          <v-flex md2 lg2>
+            <v-btn color="green" dark large @click='checkConfirm'>确 认</v-btn>
+
+          </v-flex>
         </v-layout>
-          </v-form>
-        </v-card>
-        <v-btn color="grey lighten-2" @click="e1 = 1">提交信息</v-btn>
-        <v-btn color="primary" @click="checkConfirm">确    认</v-btn>
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
@@ -133,6 +127,9 @@
                 }
 
             },
+            callbackprod() {
+                this.$emit("getNewProdData",{"checkInfo": this.checkInfo})
+            },
           getDate() {
               var date = new Date();
               var year = date.getFullYear();
@@ -160,5 +157,15 @@
     }
 </script>
 <style scoped>
-
+  .class1 {
+    color: deepskyblue;
+    font-size: large;
+    font-style: inherit;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-left: 15%
+  }
+  .textBox {
+    margin-top: 5px;
+  }
 </style>

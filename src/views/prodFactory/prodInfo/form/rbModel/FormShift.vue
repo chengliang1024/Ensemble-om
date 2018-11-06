@@ -55,9 +55,9 @@ export default {
     },
     methods: {
         queryDespositProdData() {
-            getFormShift().then(response => {
+            /*getFormShift().then(response => {
                 this.projects = response.data.formShift
-            })
+            })*/
         }
     }
 };

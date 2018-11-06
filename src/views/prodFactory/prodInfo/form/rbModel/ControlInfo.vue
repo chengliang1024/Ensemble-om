@@ -2,62 +2,32 @@
     <v-container fluid pr-5 pt-0><div slot="widget-content">
             <v-container fluid pt-1>
                 <v-layout row wrap>
-                    <v-flex xs12 md2 lg2>
-                        <v-subheader class="primary--text subheading">通存范围*</v-subheader>
+                    <v-flex md6 lg6>
+                        <dc-multiselect v-model="prodData.prodDefines.AUTOMATIC_RANGE" labelDesc="通存范围" :options="draRange" :isMultiSelect="false" :perShow="true"></dc-multiselect>
                     </v-flex>
-                    <v-flex md4 lg4>
-                        <dc-multiselect v-model="prodData.prodDefines.AUTOMATIC_RANGE.attrValue" :options="draRange" :isMultiSelect="false"></dc-multiselect>
+                    <v-flex md6 lg6>
+                        <dc-multiselect v-model="prodData.prodDefines.CIR_EXCHANGE_RANGE" labelDesc="通兑范围" :options="depRange" :isMultiSelect="false" :perShow="true"></dc-multiselect>
                     </v-flex>
-                    <v-flex xs12 md2 lg2>
-                        <v-subheader class="primary--text subheading">通兑范围*</v-subheader>
+                    <v-flex md6 lg6>
+                        <dc-switch v-model="prodData.prodDefines.TRAN_CIR_EXCG_FLAG" labelDesc="转账通兑标识" :perShow="true"></dc-switch>
                     </v-flex>
-                    <v-flex md4 lg4>
-                        <dc-multiselect v-model="prodData.prodDefines.CIR_EXCHANGE_RANGE.attrValue" :options="depRange" :isMultiSelect="false"></dc-multiselect>
+                    <v-flex md6 lg6>
+                        <dc-switch v-model="prodData.prodDefines.CASH_CIR_EXCG_FLAG" labelDesc="现金通兑标识" :perShow="true"></dc-switch>
                     </v-flex>
-                    <v-flex xs12 md2 lg2>
-                        <v-subheader class="primary--text subheading">转账通兑标识*</v-subheader>
+                    <v-flex md6 lg6>
+                        <dc-switch v-model="prodData.prodDefines.CLIENT_CONTRAL_FLAG" labelDesc="客户控制标识" :perShow="true"></dc-switch>
                     </v-flex>
-                    <v-flex md4 lg4>
-                        <dc-switch v-model="prodData.prodDefines.TRAN_CIR_EXCG_FLAG.attrValue"></dc-switch>
+                    <v-flex md6 lg6>
+                        <dc-switch v-model="prodData.prodDefines.CHANNEL_CONT_FLAG" labelDesc="渠道控制标识" :perShow="true"></dc-switch>
                     </v-flex>
-
-                    <v-flex xs12 md2 lg2>
-                        <v-subheader class="primary--text subheading">现金通兑标识*</v-subheader>
+                    <v-flex md6 lg6>
+                        <dc-switch v-model="prodData.prodDefines.BRC_AREA_CONT_FLAG" labelDesc="机构区域控制" :perShow="true"></dc-switch>
                     </v-flex>
-                    <v-flex md4 lg4>
-                        <dc-switch v-model="prodData.prodDefines.CASH_CIR_EXCG_FLAG.attrValue"></dc-switch>
+                    <v-flex md6 lg6>
+                        <dc-switch v-model="prodData.prodDefines.CHARGE_TYPE" labelDesc="收费标识" :perShow="true"></dc-switch>
                     </v-flex>
-
-                    <v-flex xs12 md2 lg2>
-                        <v-subheader class="primary--text subheading">客户控制标识*</v-subheader>
-                    </v-flex>
-                    <v-flex md4 lg4>
-                        <dc-switch v-model="prodData.prodDefines.CLIENT_CONTRAL_FLAG.attrValue"></dc-switch>
-                    </v-flex>
-
-                    <v-flex xs12 md2 lg2>
-                        <v-subheader class="primary--text subheading">渠道控制标识*</v-subheader>
-                    </v-flex>
-                    <v-flex md4 lg4>
-                        <dc-switch v-model="prodData.prodDefines.CHANNEL_CONT_FLAG.attrValue"></dc-switch>
-                    </v-flex>
-                    <v-flex xs12 md2 lg2>
-                        <v-subheader class="primary--text subheading">机构区域控制*</v-subheader>
-                    </v-flex>
-                    <v-flex md4 lg4>
-                        <dc-switch v-model="prodData.prodDefines.BRC_AREA_CONT_FLAG.attrValue"></dc-switch>
-                    </v-flex>
-                    <v-flex xs12 md2 lg2>
-                        <v-subheader class="primary--text subheading">收费标识*</v-subheader>
-                    </v-flex>
-                    <v-flex md4 lg4>
-                        <dc-switch v-model="prodData.prodDefines.CHARGE_TYPE.attrValue"></dc-switch>
-                    </v-flex>
-                    <v-flex xs12 md2 lg2>
-                        <v-subheader class="primary--text subheading">状态转移标识*</v-subheader>
-                    </v-flex>
-                    <v-flex md4 lg4>
-                        <dc-switch v-model="prodData.prodDefines.STATUS_TRAN_FLAG.attrValue"></dc-switch>
+                    <v-flex md6 lg6>
+                        <dc-switch v-model="prodData.prodDefines.STATUS_TRAN_FLAG" labelDesc="状态转移标识" :perShow="true"></dc-switch>
                     </v-flex>
                 </v-layout>
             </v-container>

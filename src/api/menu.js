@@ -43,11 +43,11 @@ const Menu = [
     component: 'components',
     icon: 'account_balance',
     items: [
-      { name: 'RB100', title: '活期产品组', component: 'prod/rbPrivateProds' },
+      { name: 'RB101', title: '活期产品组', component: 'prod/rbPrivateProds' },
       { name: 'RB200', title: '对公存款组', component: 'prod/rbPublicProd' },
       { name: 'RB300', title: '同业存款组', component: 'prod/rbHorizontalProd' },
-        { name: 'RB400', title: '个人存款组', component: 'prod/rbPrivateProd' },
-      { name: 'RBBASE', title: '存款基础产品组', component: 'prod/rbBaseProd' },
+        { name: 'RB101', title: '存款可售产品', component: 'RbBaseProds' },
+      { name: 'RB100', title: '存款基础产品', component: 'RbBaseProds' },
     ]
   },
   {
@@ -127,7 +127,8 @@ const Menu = [
       { name: 'diffList', title: '差异对比2', component: 'diffList' },
       { name: 'deposit', title: '产品展现', component: 'prod/deposit' },
       { name: 'publishForm', title: '参数变动记录', component: 'publishForm' },
-      { name: 'getAction', title: '连通后台测试', component: 'getAction' },
+      { name: 'RB100', title: '连通后台测试', component: 'RbBaseProds' },
+      { name: 'RB100', title: '连通后台测试2', component: 'publishDate2' },
       { name: 'publishDate2', title: '参数变动记录2', component: 'publishDate2' },
     ]
   },

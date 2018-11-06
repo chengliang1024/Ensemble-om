@@ -10,7 +10,7 @@
     </v-tabs>
     <!-- </v-toolbar> -->
     <v-tabs-items v-model="activeName" class="white elevation-1">
-      <v-tab-item v-for="i in 3" :key=i :id="'mobile-tabs-5-' + i">
+      <v-tab-item v-for="i in 3" :key=i>
         <v-card>
           <v-card-text>
             <deposit-cmb v-if="i==1"></deposit-cmb>

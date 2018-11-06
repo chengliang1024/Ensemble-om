@@ -3,47 +3,26 @@
         <div slot="widget-content">
             <v-container fluid pt-1>
                 <v-layout row wrap>
-                    <v-flex xs12 md2 lg2>
-                        <v-subheader class="primary--text subheading">存入控制方式*</v-subheader>
+                    <v-flex md6 lg6>
+                        <dc-multiselect v-model="prodData.mbEventInfos['CLOSE_'+prodData.prodType.prodType].mbEventAttrs.DEPOSIT_CONTRAL_WAY" labelDesc="存入控制方式" :options="systemControlApproach" :isMultiSelect="false" :perShow="true"></dc-multiselect>
                     </v-flex>
-                    <v-flex md4 lg4>
-                        <dc-multiselect v-model="prodData.mbEventInfos['CLOSE_'+prodData.prodType.prodType].mbEventAttrs.DEPOSIT_CONTRAL_WAY.attrValue" :options="systemControlApproach" :isMultiSelect="false"></dc-multiselect>
+                    <v-flex md6 lg6>
+                        <dc-switch v-model="prodData.mbEventInfos['CLOSE_'+prodData.prodType.prodType].mbEventAttrs.AGENT_FLAG" labelDesc="是否允许代办" :perShow="true"></dc-switch>
                     </v-flex>
-                    <v-flex xs12 md2 lg2>
-                        <v-subheader class="primary--text subheading">是否允许代办*</v-subheader>
+                    <v-flex md6 lg6>
+                        <dc-multiselect v-model="prodData.mbEventInfos['CLOSE_'+prodData.prodType.prodType].mbEventAttrs.CAPITAL_ORIGIN_WAY" labelDesc="资金来源方式" :options="cashResouce" :isMultiSelect="false" :perShow="true"></dc-multiselect>
                     </v-flex>
-                    <v-flex md4 lg4>
-                        <dc-switch v-model="prodData.mbEventInfos['CLOSE_'+prodData.prodType.prodType].mbEventAttrs.AGENT_FLAG.attrValue"></dc-switch>
+                    <v-flex md6 lg6>
+                        <dc-switch v-model="prodData.mbEventInfos['CLOSE_'+prodData.prodType.prodType].mbEventAttrs.CHECK_RESTRAINT" labelDesc="账户限制检查" :perShow="true"></dc-switch>
                     </v-flex>
-                    <v-flex xs12 md2 lg2>
-                        <v-subheader class="primary--text subheading">资金来源方式*</v-subheader>
+                    <v-flex md6 lg6>
+                        <dc-switch v-model="prodData.mbEventInfos['CLOSE_'+prodData.prodType.prodType].mbEventAttrs.CHECK_SIGN" labelDesc="签约检查" :perShow="true"></dc-switch>
                     </v-flex>
-                    <v-flex md4 lg4>
-                        <dc-multiselect v-model="prodData.mbEventInfos['CLOSE_'+prodData.prodType.prodType].mbEventAttrs.CAPITAL_ORIGIN_WAY.attrValue" :options="cashResouce" :isMultiSelect="false"></dc-multiselect>
+                    <v-flex md6 lg6>
+                        <dc-switch v-model="prodData.mbEventInfos['CLOSE_'+prodData.prodType.prodType].mbEventAttrs.CHECK_CLOSE_FEE" labelDesc="欠费检查" :perShow="true"></dc-switch>
                     </v-flex>
-                    <v-flex xs12 md2 lg2>
-                        <v-subheader class="primary--text subheading">账户限制检查*</v-subheader>
-                    </v-flex>
-                    <v-flex md4 lg4>
-                        <dc-switch v-model="prodData.mbEventInfos['CLOSE_'+prodData.prodType.prodType].mbEventAttrs.CHECK_RESTRAINT.attrValue"></dc-switch>
-                    </v-flex>
-                    <v-flex xs12 md2 lg2>
-                        <v-subheader class="primary--text subheading">签约检查*</v-subheader>
-                    </v-flex>
-                    <v-flex md4 lg4>
-                        <dc-switch v-model="prodData.mbEventInfos['CLOSE_'+prodData.prodType.prodType].mbEventAttrs.CHECK_SIGN.attrValue"></dc-switch>
-                    </v-flex>
-                    <v-flex xs12 md2 lg2>
-                        <v-subheader class="primary--text subheading">欠费检查*</v-subheader>
-                    </v-flex>
-                    <v-flex md4 lg4>
-                        <dc-switch v-model="prodData.mbEventInfos['CLOSE_'+prodData.prodType.prodType].mbEventAttrs.CHECK_CLOSE_FEE.attrValue"></dc-switch>
-                    </v-flex>
-                    <v-flex xs12 md2 lg2>
-                        <v-subheader class="primary--text subheading">是否允许销户回退*</v-subheader>
-                    </v-flex>
-                    <v-flex md4 lg4>
-                        <dc-switch v-model="prodData.mbEventInfos['CLOSE_'+prodData.prodType.prodType].mbEventAttrs.CLOSE_BACK_FLAG.attrValue"></dc-switch>
+                    <v-flex md6 lg6>
+                        <dc-switch v-model="prodData.mbEventInfos['CLOSE_'+prodData.prodType.prodType].mbEventAttrs.CLOSE_BACK_FLAG" labelDesc="是否允许销户回退" :perShow="true"></dc-switch>
                     </v-flex>
                 </v-layout>
             </v-container></div>

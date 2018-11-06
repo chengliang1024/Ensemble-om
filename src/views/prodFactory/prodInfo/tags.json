@@ -1,0 +1,13 @@
+{
+  "tagList": [
+    {
+      "tagCode":"baseInfo",
+      "tagDesc":"基本信息",
+      "index":"1"
+    },{
+      "tagCode":"acctInfo",
+      "tagDesc":"账户信息",
+      "index":"2"
+    }
+  ]
+}

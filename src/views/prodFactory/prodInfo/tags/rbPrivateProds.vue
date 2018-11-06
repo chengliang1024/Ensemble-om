@@ -17,7 +17,8 @@
                     </v-tabs>
                 </v-toolbar>
                 <v-tabs-items v-model="activeName" class="white elevation-1">
-                    <v-tab-item v-for="i in 12" :key="i" :id="'mobile-tabs-5-' + i">
+                    <v-tab-item v-for="i in 12" :key="i">
+                        <v-card flat>
                         <acct-base-info v-if="i==1" v-bind:prodData="prodData"></acct-base-info>
                         <control-info v-if="i==2" v-bind:prodData="prodData"></control-info>
                         <product-object v-if="i==3" v-bind:prodData="prodData"></product-object>
@@ -30,6 +31,7 @@
                         <rate-info v-if="i==10" v-bind:prodData="prodData"></rate-info>
                         <form-shift v-if="i==11" v-bind:prodData="prodData"></form-shift>
                         <accounting-info v-if="i==12" v-bind:prodData="prodData"></accounting-info>
+                        </v-card>
                     </v-tab-item>
                 </v-tabs-items>
             </v-flex>
@@ -163,14 +165,13 @@
             this.queryProdFlow();
             window.getApp.$emit('APP_DRAWER_TOGGLED');
             if(this.$route.hash !== "" && this.$route.hash !== null) {
-                //点击主菜单产品组时 获取产品组代码
-                this.prodClass = this.$route.hash
                 //默认展示RB101产品信息
-                getProdData("RB101").then(response => {
+                getProdData(this.$route.hash).then(response => {
                     this.prodData = response.data.data
                     this.prodCode = response.data.data.prodType.prodType
                     this.prodDesc = response.data.data.prodType.prodDesc
                     this.sourceProdData = this.copy(this.prodData,this.sourceProdData)
+                this.prodClass= response.data.data.prodType.prodClass
                 });
             }else if(this.$route.params.prodClassCmp !== "" && this.$route.params.prodClassCmp !== null){
                 //通过全局搜索/产品目录  获取目标产品产品组代码

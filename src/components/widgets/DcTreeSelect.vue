@@ -17,6 +17,7 @@
 </template>
 <script>
 import Treeselect from "@riophae/vue-treeselect";
+import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 export default {
   components: { Treeselect },
   model: {
@@ -29,7 +30,7 @@ export default {
       value: [],
       thisOptions: [],
       heightSize: 0,
-      personShow: 1,
+      personShow: 0,
       peopleColor: "grey lighten-1",
       peopleDesc: "产品生效"
     };
@@ -54,21 +55,33 @@ export default {
           if(this.peopleColor === "grey lighten-1") {
               this.peopleColor = "red"
               this.peopleDesc = "分户生效"
+              this._props.msg.perEffect = "true"
           }else if (this.peopleColor === "red"){
               this.peopleColor = "grey lighten-1"
               this.peopleDesc = "产品生效"
+              this._props.msg.perEffect = "false"
           }
       },
     init(msg) {
       //通过数据个数动态修改树结构hight  每条数据hight=36px  计算最大个数为11 当数据个数>11时 树形界面右侧实现滚动条拖拽
       if(this._props.options.length > 11){
-        this.heightSize = 335
+          this.heightSize = 335
       }else{
-        this.heightSize = this.getHeigthSize(this._props.options.length)
+          this.heightSize = this.getHeigthSize(this._props.options.length)
       }
       //判断是否显示分户生效标识
-      if(this._props.perShow === false){
-          this.personShow = 0
+      if(this._props.perShow === true){
+          this.personShow = 1
+      }
+      //分户生效标识回显
+      if(this._props.msg.perEffect !== undefined && this._props.msg.perEffect !== null){
+          if(this._props.msg.perEffect === "true"){
+              this.peopleColor = "red"
+              this.peopleDesc = "分户生效"
+          }else{
+              this.peopleColor = "grey lighten-1"
+              this.peopleDesc = "产品生效"
+          }
       }
       let PropOptions = this._props.options;
       let options = [];
@@ -81,13 +94,14 @@ export default {
         options.push(option);
       }
       this.thisOptions = options;
-      if (msg != undefined) {
-        let data = msg.split(",");
+      if (msg.attrValue != undefined) {
+        let data = msg.attrValue.split(",");
         let values = [];
         for (const num in data) {
           values.push(data[num]);
         }
-        this.value = values;
+        this.value = values
+        this._props.msg.attrValue = values;
       }
     },
     reback(newValue) {
@@ -100,7 +114,8 @@ export default {
         }
       }
       if (value) {
-        this.$emit("getVue", value);
+        this._props.msg.attrValue = value
+        this.$emit("getVue", this._props.msg);
       }
     },
     getHeigthSize(val) {

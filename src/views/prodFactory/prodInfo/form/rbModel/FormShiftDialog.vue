@@ -34,10 +34,8 @@
         </v-card>
     </v-dialog>
 </template>
+<script>
 export default {
-    components: {
-        FormShiftDialog
-    },
     data () {
         return {
             dialog: false,
@@ -96,3 +94,4 @@ export default {
         }
     }
 };
+</script>

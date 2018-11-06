@@ -1,7 +1,6 @@
 <template>
     <v-card>
         <v-toolbar card dense color="transparent">
-
             <a-button type="primary" @click="onAdd">新增</a-button>
             <a-button type="primary" @click="onEdit" class="ml-2">修改</a-button>
             <a-button type="primary" @click="onDelete" class="ml-2">删除</a-button>
@@ -13,41 +12,12 @@
                     <v-card-text>
                 <v-form v-model="valid">
                     <v-text-field
+                            :disabled="disabledFlag"
                             v-model="selected.feeType"
                             :counter="10"
-                            label="费用类型"
+                            label="批量收费类型"
                             required
                             class="mx-5"
-                    ></v-text-field>
-                    <v-text-field
-                            v-model="selected.chargePeriodFreq"
-                            label="收费频率"
-                            class="mx-5"
-                            required
-                    ></v-text-field>
-                    <v-text-field
-                            v-model="selected.chargeDay"
-                            label="收费日"
-                            class="mx-5"
-                            required
-                    ></v-text-field>
-                    <v-text-field
-                            v-model="selected.nextChargeDate"
-                            label="下一收费日期"
-                            class="mx-5"
-                            required
-                    ></v-text-field>
-                    <v-text-field
-                            v-model="selected.chargeDealMethod"
-                            label="收费处理方式"
-                            class="mx-5"
-                            required
-                    ></v-text-field>
-                    <v-text-field
-                            v-model="selected.conDeductFlag"
-                            label="持续扣款标示"
-                            class="mx-5"
-                            required
                     ></v-text-field>
                     <v-text-field
                             v-model="selected.conDeductTimes"
@@ -55,21 +25,76 @@
                             class="mx-5"
                             required
                     ></v-text-field>
+                    <v-flex>
+                        <dc-multiselect
+                                :isMultiSelect="false"
+                                v-model="selected.chargePeriodFreq"
+                                :options="chargePeriodFreq1"
+                                labelDesc="  收费频率"
+                        ></dc-multiselect>
+
+                    </v-flex>
+
+                   <!-- <v-text-field
+                            v-model="selected.chargeDealMethod"
+                            label="收费处理方式"
+                            class="mx-5"
+                            required
+                    ></v-text-field>-->
+                    <v-flex>
+                        <dc-multiselect
+                                :isMultiSelect="false"
+                                v-model="selected.chargeDealMethod"
+                                :options="chargeDealMethod1"
+                                labelDesc="  收费处理方式"
+                        ></dc-multiselect>
+
+                    </v-flex>
+                    <!--<v-text-field
+                            v-model="selected.conDeductFlag"
+                            label="持续扣款标识"
+                            class="mx-5"
+                            required
+                    ></v-text-field>-->
+                    <v-flex>
+                        <dc-multiselect
+                                :isMultiSelect="false"
+                                v-model="selected.conDeductFlag"
+                                :options="conDeductFlag1"
+                                labelDesc="  持续扣款标识"
+                        ></dc-multiselect>
+
+                    </v-flex>
+                    <v-flex>
+                        <dc-date v-model="selected.chargeDay" labelDesc="收费日期"></dc-date>
+                    </v-flex>
+                    <!-- <v-text-field
+                             v-model="selected.nextChargeDate"
+                             label="下一收费日期"
+                             class="mx-5"
+                             required
+                     ></v-text-field>-->
+                    <v-flex>
+                        <dc-date v-model="selected.nextChargeDate" labelDesc="下一收费日期"></dc-date>
+                    </v-flex>
                 </v-form>
-                <v-btn
-                        color="green darken-1"
-                        flat="flat"
-                        @click="submit"
-                >
+<v-spacer></v-spacer>
+                <v-flex mx-5>
+                    <v-btn
+                    color="green darken-1"
+                    flat="flat"
+                    @click="submit"
+                    >
                     确认
-                </v-btn>
-                  <v-btn
-                          color="green darken-1"
-                          flat="flat"
-                          @click="dialog = false"
-                  >
-                      取消
-                  </v-btn>
+                    </v-btn>
+                    <v-btn
+                    color="green darken-1"
+                    flat="flat"
+                    @click="dialog = false"
+                    >
+                    取消
+                    </v-btn>
+                </v-flex>
                     </v-card-text>
                 </v-card>
             </v-dialog>
@@ -84,11 +109,13 @@
 
 </template>
 <script>
+import DcMultiselect from '@/components/widgets/DcMultiselect'
 import {getChargeDefine} from '@/api/table';
 import toast from '@/utils/toast';
 import { getInitData } from "@/mock/init";
 import {getColumnDesc} from '@/utils/columnDesc'
 import {removeByValue} from '@/utils/util'
+import DcDate from '@/components/widgets/DcDate'
 
 export default {
     filters: {
@@ -96,9 +123,12 @@ export default {
             return getColumnDesc(key)
         }
     },
+    components: { DcMultiselect,DcDate},
     props: ["prodData"],
     data () {
         return {
+            chargeDefinesInfo: '',
+            disabledFlag: false,
             prodType: '',
             open: true,
             valid: true,
@@ -107,6 +137,36 @@ export default {
             option: '',
             selectedRowKeys: [],
             selected: {},
+            chargePeriodFreq1: [
+                {
+                    "key": "3D",
+                    "value": "3D-3天"
+                },
+                {
+                    "key": "2D",
+                    "value": "2D-2天"
+                }
+            ],
+            chargeDealMethod1: [
+                {
+                    "key": "10",
+                    "value": "10-实时生效"
+                },
+                {
+                    "key": "11",
+                    "value": "11-日终处理"
+                }
+            ],
+            conDeductFlag1: [
+                {
+                    "key": "Y",
+                    "value": "Y-持续扣款"
+                },
+                {
+                    "key": "N",
+                    "value": "N-非持续扣款"
+                }
+            ],
             columns: [
                 {dataIndex: 'feeType', title: '批量收费类型',scopedSlots: { customRender: 'feeType' }},
                 {dataIndex: 'chargePeriodFreq', title: '收费频率'},
@@ -115,8 +175,7 @@ export default {
                 {dataIndex: 'chargeDealMethod', title: '收费处理方式'},
                 {dataIndex: 'conDeductFlag', title: '持续扣款标识'},
                 {dataIndex: 'conDeductTimes', title: '持续扣款次数'}
-            ],
-            chargeDefinesInfo: []
+            ]
         };
     },
     watch: {
@@ -135,8 +194,12 @@ export default {
                 let selected=this.selected;
                 selected.prodType=this.prodType
                 dataSource.push(selected)
+                this.dialog=false;
             }
-            this.dialog=false;
+            if(this.option =='edit')
+            {
+                this.dialog=false;
+            }
         },
         onDelete () {
             let dataSource=this.chargeDefinesInfo
@@ -146,10 +209,12 @@ export default {
             this.option='add';
             this.selected={};
             this.dialog=true;
+            this.disabledFlag =false;
         },
         onEdit () {
             this.option='edit';
             this.dialog=true;
+            this.disabledFlag = true;
         },
         customRow (record) {
             return {

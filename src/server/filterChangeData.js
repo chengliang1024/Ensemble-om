@@ -6,40 +6,30 @@ export function filterChangeData (prodData,sourceProdData,optionType) {
     var copyFlag = optionType
     backData = copy(sourceProdData,backData)
     // 处理prodType对象数据
-    var prodType = {newData: {},oldData: {}}
-    var newProdMap = {}
-    var oldProdMap = {}
-    if(copyFlag === "Y"){
-        //产品复制时，保留所有最新数据
-        newProdMap = prodData.prodType
-    }else {
-        for (let i in prodData.prodType) {
-            if (prodData.prodType[i] === sourceProdData.prodType[i]) {
-                oldProdMap[i] = sourceProdData.prodType[i]
-            } else {
-                newProdMap[i] = prodData.prodType[i]
-                oldProdMap[i] = sourceProdData.prodType[i]
-            }
-        }
-    }
-    prodType.newData = Object.assign(prodType.newData,newProdMap)
-    prodType.oldData = Object.assign(prodType.oldData,oldProdMap)
-    backData.prodType = prodType
+    prodTypeDeal(prodData,sourceProdData,backData,copyFlag)
     //处理prodDefines对象数据
     var prodDefines = {}
-    for (let i in prodData.prodDefines) {
-         if(copyFlag === "Y"){
-             //产品复制时，保留所有最新数据
-             let newMap = {newData: {},oldData: {}}
-             newMap.newData = prodData.prodDefines[i]
-             prodDefines[i] = newMap
-         }else if (prodData.prodDefines[i].attrValue !== sourceProdData.prodDefines[i].attrValue) {
-             let newMap = {newData: {},oldData: {}}
-             newMap.newData = prodData.prodDefines[i]
-             newMap.oldData = sourceProdData.prodDefines[i]
-             prodDefines[i] = newMap
-         }
-     }
+    for (let j in prodData.prodDefines) {
+        let newMap = {newData: {},oldData: {},optionType: ""}
+        if(copyFlag === "Y" && prodData.prodDefines[j].group !== "BASE"){
+            prodData.prodDefines[j].group = null
+            newMap.newData = prodData.prodDefines[j];
+            newMap.optionType = "I"
+            prodDefines[j] = newMap
+        }else if (sourceProdData.prodDefines[j] === undefined) {
+            //prodDefine 增加参数
+            newMap.newData = prodData.prodDefines[j]
+            newMap.optionType = "I"
+            prodDefines[j] = newMap
+        }else if(prodData.prodDefines[j].attrValue !== sourceProdData.prodDefines[j].attrValue){
+            //prodDefine 修改参数
+            prodData.prodDefines[j].group = null
+            newMap.newData = prodData.prodDefines[j]
+            newMap.oldData = sourceProdData.prodDefines[j]
+            newMap.optionType = "U"
+            prodDefines[j] = newMap
+        }
+    }
     backData.prodDefines = prodDefines
 
     //处理mbEventInfos对象数据
@@ -56,27 +46,27 @@ export function filterChangeData (prodData,sourceProdData,optionType) {
 
         //mbEventAttrs
         for (let k in prodData.mbEventInfos[m].mbEventAttrs){
-            if(copyFlag === "Y"){
-                let newDataMap= {newData: {}, oldData: {}}
+            let newDataMap= {newData: {}, oldData: {},optionType: ""}
+            if(copyFlag === "Y" || sourceProdData.mbEventInfos[m].mbEventAttrs[k] === undefined){
                 newDataMap.newData = prodData.mbEventInfos[m].mbEventAttrs[k]
+                newDataMap.optionType = "I"
                 flag = "true"
                 mbEventAttrs[k] = newDataMap
             }else if(prodData.mbEventInfos[m].mbEventAttrs[k].attrValue !== sourceProdData.mbEventInfos[m].mbEventAttrs[k].attrValue) {
-                    let newDataMap= {newData: {}, oldData: {}}
-                    newDataMap.newData = prodData.mbEventInfos[m].mbEventAttrs[k]
-                    newDataMap.oldData = sourceProdData.mbEventInfos[m].mbEventAttrs[k]
-                    flag = "true"
-                    mbEventAttrs[k] = newDataMap
-                }
+                newDataMap.newData = prodData.mbEventInfos[m].mbEventAttrs[k]
+                newDataMap.oldData = sourceProdData.mbEventInfos[m].mbEventAttrs[k]
+                newDataMap.optionType = "U"
+                flag = "true"
+                mbEventAttrs[k] = newDataMap
+            }
         }
         temp.mbEventAttrs = Object.assign(temp.mbEventAttrs,mbEventAttrs)
         backData.mbEventInfos[m].mbEventAttrs = temp.mbEventAttrs
 
         //mbEventParts
         for (let x in prodData.mbEventInfos[m].mbEventParts){
-            //降低复杂度
             mbEventPartDeal(prodData,x,m,copyFlag,flagPart,mbEventParts,sourceProdData);
-         }
+        }
         temp.mbEventParts = Object.assign(temp.mbEventParts,mbEventParts)
         backData.mbEventInfos[m].mbEventParts = temp.mbEventParts
 
@@ -96,41 +86,24 @@ export function filterChangeData (prodData,sourceProdData,optionType) {
         temp.mbEventType = Object.assign(temp.mbEventType,mbEventType)
         backData.mbEventInfos[m].mbEventType = temp.mbEventType
 
-         if(flag === "false" && flagType === "false" && flagPart === "false"){
-            //事件均未改变时 返回给后台报文中删除该条信息
-             delete backData.mbEventInfos[m]
-         }
+        if(flag === "false" && flagType === "false" && flagPart === "false"){
+            //该事件下所有参数均未改变时 返回给后台报文中删除该事件
+            delete backData.mbEventInfos[m]
+        }
     }
-    //处理单表数据 mbProdCharge
-    //加工后数据集合
+    //处理单表数据
     var backVal = []
-    //表名
-    var tables = "mbProdCharge"
-    // var primaryKey =  {prodType: 'prodType', feeType: 'feeType'}
-    //调用处理方法
-    tablesMainDeal(prodData,sourceProdData,backVal,tables)
+    tablesMainDeal(prodData,sourceProdData,backVal,"mbProdCharge")
     //将加工后数据回填到待返回数据集合
     backData.mbProdCharge = backVal
-
-    //glProdAccounting
     backVal = []
-    tables = "glProdAccounting"
-    // var primaryKey =  {prodType: 'prodType', accountingStatus: 'accountingStatus'}
-    tablesMainDeal(prodData,sourceProdData,backVal,tables)
+    tablesMainDeal(prodData,sourceProdData,backVal,"glProdAccounting")
     backData.glProdAccounting = backVal
-
-    //irl_prod_int
     backVal = []
-    tables = "irlProdInt"
-    // var primaryKey =  {prodType: 'prodType', eventType: 'eventType', intClass: 'intClass'}
-    tablesMainDeal(prodData,sourceProdData,backVal,tables)
+    tablesMainDeal(prodData,sourceProdData,backVal,"irlProdInt")
     backData.irlProdInt = backVal
-
-    //mb_acct_stats
     backVal = []
-    tables = "mbAcctStats"
-    // var primaryKey =  {internalKey: 'internalKey'}
-    tablesMainDeal(prodData,sourceProdData,backVal,tables)
+    tablesMainDeal(prodData,sourceProdData,backVal,"mbAcctStats")
     backData.mbAcctStats = backVal
     return backData
 }
@@ -209,26 +182,46 @@ export function tablesModDeal(prodData,sourceProdData,s,j,backVal,index,tables) 
 }
 //降低mbEventPart对象处理方法复杂度，分离主方法
 export function mbEventPartDeal(prodData,x,m,copyFlag,flagPart,mbEventParts,sourceProdData) {
-        for(let z in prodData.mbEventInfos[m].mbEventParts[x]) {
-                if (copyFlag === "Y") {
-                    let newDataPart = {newData: {}, oldData: {}}
-                    newDataPart.newData = prodData.mbEventInfos[m].mbEventParts[x][z]
-                    flagPart = "true"
-                    let map = {}
-                    map[z] = newDataPart
-                    mbEventParts[x] = map
-                } else if (prodData.mbEventInfos[m].mbEventParts[x][z].attrValue !== sourceProdData.mbEventInfos[m].mbEventParts[x][z].attrValue) {
-                    let newDataPart = {newData: {}, oldData: {}}
-                    newDataPart.newData = prodData.mbEventInfos[m].mbEventParts[x][z]
-                    newDataPart.oldData = sourceProdData.mbEventInfos[m].mbEventParts[x][z]
-                    flagPart = "true"
-                    let map = {}
-                    map[z] = newDataPart
-                    mbEventParts[x] = map
-                }
+    for(let z in prodData.mbEventInfos[m].mbEventParts[x]) {
+        if (copyFlag === "Y") {
+            let newDataPart = {newData: {}, oldData: {}}
+            newDataPart.newData = prodData.mbEventInfos[m].mbEventParts[x][z]
+            flagPart = "true"
+            let map = {}
+            map[z] = newDataPart
+            mbEventParts[x] = map
+        } else if (prodData.mbEventInfos[m].mbEventParts[x][z].attrValue !== sourceProdData.mbEventInfos[m].mbEventParts[x][z].attrValue) {
+            let newDataPart = {newData: {}, oldData: {}}
+            newDataPart.newData = prodData.mbEventInfos[m].mbEventParts[x][z]
+            newDataPart.oldData = sourceProdData.mbEventInfos[m].mbEventParts[x][z]
+            flagPart = "true"
+            let map = {}
+            map[z] = newDataPart
+            mbEventParts[x] = map
         }
+    }
 }
-
+//处理prodType对象数据
+export function prodTypeDeal(prodData,sourceProdData,backData,copyFlag) {
+    var prodType = {newData: {},oldData: {}}
+    var newProdMap = {}
+    var oldProdMap = {}
+    if(copyFlag === "Y"){
+        newProdMap = prodData.prodType
+    }else {
+        for (let i in prodData.prodType) {
+            if (prodData.prodType[i] === sourceProdData.prodType[i]) {
+                oldProdMap[i] = sourceProdData.prodType[i]
+            } else {
+                newProdMap[i] = prodData.prodType[i]
+                oldProdMap[i] = sourceProdData.prodType[i]
+            }
+        }
+    }
+    prodType.newData = Object.assign(prodType.newData,newProdMap)
+    prodType.oldData = Object.assign(prodType.oldData,oldProdMap)
+    backData.prodType = prodType
+}
 //对象浅拷贝
 export function copy(obj1,obj2) {
     var obj = obj2||{};

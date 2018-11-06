@@ -1,25 +1,25 @@
 <template>
   <div>
     <v-card>
-      <v-toolbar scroll-off-screen scroll-target="#scrolling-techniques" flat>
-        <dc-switch v-model="ex11"
-                          label="隐藏相同项"
-                          color="success"
-                          value="onlyDiff"
-                          hide-details
-                          class="prodDiffSwitch"></dc-switch>
+      <v-toolbar flat>
+        <v-layout style="color: deepskyblue">
+          <v-flex xs12 md5 lg5>
+            <v-switch v-model="ex11" label="隐藏未修改参数" color="success" value="Y" hide-details class="prodDiffSwitch"></v-switch>
+          </v-flex>
+          <v-flex xs12 md4 lg4>
+            <v-toolbar-title>修改前参数值</v-toolbar-title>
+          </v-flex>
+          <v-flex xs12 md3 lg3>
+            <v-toolbar-title>修改后参数值</v-toolbar-title>
+          </v-flex>
+        </v-layout>
       </v-toolbar>
-      <v-card-text class="pa-0">
 
+      <v-card-text class="pa-0">
         <v-layout row wrap>
           <div v-for="(prodList, index1) in prodDiffData" class="diffList">
             <v-list dense>
               <template v-for="(item, index) in prodList.items">
-                <v-btn class="diffIdButton" color="red" v-if="index==0&&index1!=0" dark @click="deleteTd(prodList.prodType)">
-                  {{prodList.prodType}}
-                </v-btn>
-                <div class="diffEg" v-if="index==0&&index1==0" dark>
-                </div>
                 <v-divider
                         v-if="item.divider"
                         :inset="item.inset"
@@ -38,9 +38,7 @@
           </div>
         </v-layout>
       </v-card-text>
-
     </v-card>
-
   </div>
 </template>
 
@@ -194,11 +192,11 @@ export default {
        }
        let diffList=[];
        let columnDescList={prodType: '',items: columnDesc};
-       let columnNewList={prodType: prodType+'修改后',items: columnNew};
-       let columnOldList={prodType: prodType+'修改前' ,items: columnOld};
+       let columnNewList={prodType: '',items: columnNew};
+       let columnOldList={prodType: '',items: columnOld};
        diffList.push(columnDescList);
        diffList.push(columnNewList);
-       diffList.push(columnOldList);
+        diffList.push(columnOldList);
       this.prodDiffData = diffList;
     }
   }
@@ -211,6 +209,7 @@ export default {
   border-right-width: 1px;
   border-color: rgba(40, 24, 31, 0.21);
   text-align: center;
+  font-size: large;
 }
 .tbColor {
   background-color: #e3f2fd;
@@ -231,4 +230,7 @@ export default {
 .diffEg {
   height: 48px;
 }
+  .diffTitle {
+    color: #BBDEFB;
+  }
 </style>

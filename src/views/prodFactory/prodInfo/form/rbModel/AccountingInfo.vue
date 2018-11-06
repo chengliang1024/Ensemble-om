@@ -3,21 +3,22 @@
         <v-toolbar card dense color="transparent">
                 <a-button type="primary" class="ml-2" @click="onAdd">新增</a-button>
                 <a-button type="primary" class="ml-2" @click="onEdit">修改</a-button>
-                <a-button type="primary" class="ml-2" @click="onDelete">删除</a-button>
+                <a-button type="primary" class="ml-2" dark @click="onDelete">删除</a-button>
                 <v-dialog
                         v-model="dialog"
                         width="500"
                 >
                 <v-card>
-                    <v-card-text>
-                    <v-form v-model="valid">
-                    <v-text-field
-                            v-model="selected.prodType"
-                            :counter="10"
-                            label="产品类型"
-                            required
-                            class="mx-5"
-                    ></v-text-field>
+                        <v-card-text>
+                            <v-form v-model="valid">
+                                <v-text-field
+                                        :disabled="disabledFlag"
+                                        v-model="selected.prodType"
+                                        :counter="10"
+                                        label="产品类型"
+                                        required
+                                        class="mx-5"
+                                ></v-text-field>
                     <v-text-field
                             v-model="selected.accountingStatus"
                             :counter="10"
@@ -80,90 +81,6 @@
         </v-card-text>
     </v-card>
 </template>
-    <!-- <v-card>
-         <v-card-text>
-             <v-flex xs12 md12 lg12>
-                 <div slot="widget-content">
-                     <v-container fluid pt-1>
-                         <v-layout row wrap>
-                             <v-flex xs12 md2 lg2>
-                                 <v-subheader class="primary&#45;&#45;text subheading">产品类型*</v-subheader>
-                             </v-flex>
-                             <v-flex md4 lg4>
-                                 <v-text-field class="primary&#45;&#45;text mx-1" label="产品类型" name="title" v-model="editedItem.prodType" single-line hide-details disabled>
-                                 </v-text-field>
-                             </v-flex>
-                             <v-flex xs12 md2 lg2>
-                                 <v-subheader class="primary&#45;&#45;text subheading">核算状态*</v-subheader>
-                             </v-flex>
-                             <v-flex md4 lg4>
-                                 <v-select class="primary&#45;&#45;text mx-2" :items="accountingStatus" v-model="editedItem.accountingStatus" label="核算状态" item-text="value" item-value="key" single-line hide-details></v-select>
-                            </v-flex>
-                         </v-layout>
-                         <v-layout row wrap>
-                             <v-flex xs12 md2 lg2>
-                                 <v-subheader class="primary&#45;&#45;text subheading">账套*</v-subheader>
-                             </v-flex>
-                             <v-flex md4 lg4>
-                                 <v-text-field class="primary&#45;&#45;text mx-1" label="账套" name="title" v-model="editedItem.businessUnit" single-line hide-details>
-                                 </v-text-field>
-                             </v-flex>
-                             <v-flex xs12 md2 lg2>
-                                 <v-subheader class="primary&#45;&#45;text subheading">负债科目代码*</v-subheader>
-                             </v-flex>
-                             <v-flex md4 lg4>
-                                 <v-select class="primary&#45;&#45;text mx-2" :items="glCodeL" v-model="editedItem.glCodeL" label="负债科目代码" item-text="value" item-value="key" single-line hide-details></v-select>
-                             </v-flex>
-                         </v-layout>
-                         <v-layout row wrap>
-                             <v-flex xs12 md2 lg2>
-                                 <v-subheader class="primary&#45;&#45;text subheading">利息支出科目代码*</v-subheader>
-                             </v-flex>
-                             <v-flex md4 lg4>
-                                 <v-select class="primary&#45;&#45;text mx-2" :items="glCodeIntE" v-model="editedItem.glCodeIntE" label="利息支出科目代码" item-text="value" item-value="key" single-line hide-details></v-select>
-                             </v-flex>
-                             <v-flex xs12 md2 lg2>
-                                 <v-subheader class="primary&#45;&#45;text subheading">应付利息科目代码*</v-subheader>
-                             </v-flex>
-                             <v-flex md4 lg4>
-                                 <v-select class="primary&#45;&#45;text mx-2" :items="glCodeIntPay" v-model="editedItem.glCodeIntPay" label="应付利息科目代码" item-text="value" item-value="key" single-line hide-details></v-select>
-                             </v-flex>
-                         </v-layout>
-                     </v-container>
-                 </div>
-             </v-flex>
-             <v-layout row wrap>
-                 <v-flex xs12 md3 lg3>
-                 </v-flex>
-                 <v-btn color="success" depressed="" @click="close"><v-icon >assignment_turned_in</v-icon>取消</v-btn>
-                 <v-flex xs12 md4 lg4>
-                 </v-flex>
-                 <v-btn color="success" depressed="" @click="saveClick"><v-icon >assignment_turned_in</v-icon>保存</v-btn>
-             </v-layout>
-         </v-card-text>
-     </v-card>
- </v-dialog>
-</v-toolbar>-->
-       <!-- <v-divider></v-divider>
-        <v-card-text class="pa-0">
-            <template>
-                <v-data-table :headers="headers" :items="prodAccountingInfo" hide-actions class="elevation-0">
-                    <template slot="items" slot-scope="props">
-                        <tr @click="getSelect(props.item)" v-bind:class="{'chargeSelected': props.item==editedItem }" highlight-row>
-                            <td class="text-xs-left">{{ props.item.prodType | getColumnDesc}}</td>
-                            <td class="text-xs-left">{{ props.item.accountingStatus | getColumnDesc}}</td>
-                            <td class="text-xs-left">{{ props.item.businessUnit | getColumnDesc}}</td>
-                            <td class="text-xs-left">{{ props.item.glCodeL | getColumnDesc}}</td>
-                            <td class="text-xs-left">{{ props.item.glCodeIntE | getColumnDesc}}</td>
-                            <td class="text-xs-left">{{ props.item.glCodeIntPay | getColumnDesc}}</td>
-                        </tr>
-                    </template>
-                </v-data-table>
-            </template>
-            <v-divider></v-divider>
-        </v-card-text>-->
-
-
 <script>
     import {getChargeDefine} from '@/api/table';
     import {getColumnDesc} from '@/utils/columnDesc'
@@ -180,6 +97,7 @@
         props: ["prodData"],
         data () {
             return {
+                disabledFlag: false,
                 valid: true,
                 select: {},
                 columns: [
@@ -229,12 +147,11 @@
         },
         watch: {
             prodData (val) {
-                this.getChargeDefinesInfo(val)
+                this.getAccountingInfo(val)
             }
         },
         mounted: function() {
-            this.queryDespositProdData(this.prodData)
-            this.initRefDate()
+            this.getAccountingInfo(this._props.prodData)
         },
         methods: {
             submit () {
@@ -254,10 +171,12 @@
                 this.option='add';
                 this.selected={};
                 this.dialog=true;
+                this.disabledFlag=true
             },
             onEdit () {
                 this.option='edit';
                 this.dialog=true;
+                this.disabledFlag = true;
             },
             customRow (record) {
                 return {
@@ -280,11 +199,12 @@
                 }
                 this.selected=record;
             },
-            getChargeDefinesInfo(val) {
+            getAccountingInfo(val) {
                 //初始化产品对应的信息
-                this.prodAccountingInfo = []
-                this.prodAccountingInfo = val.glProdAccounting
-                this.prodType = val.prodType.prodType
+                if(val!=undefined&&val.prodType.prodType!=undefined) {
+                    this.accountingInfos = val.glProdAccounting
+                    this.prodType = val.prodType.prodType
+                }
             },
             editItem (item) {
                 this.editedIndex = this.projects.indexOf(item)
@@ -299,7 +219,6 @@
                 this.glCodeL = this.refData[2].paraDataRb.glCode;
                 this.glCodeIntE = this.refData[2].paraDataRb.glCode;
                 this.glCodeIntPay = this.refData[2].paraDataRb.glCode;
-
             },
             deleteItem (item) {
                 const index = this.projects.indexOf(item)

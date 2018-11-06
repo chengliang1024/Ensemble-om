@@ -3,24 +3,14 @@
         <div slot="widget-content">
           <v-container fluid pt-1>
             <v-layout row wrap>
-              <v-flex xs12 md2 lg2>
-                <v-subheader class="primary--text subheading">结息周期*</v-subheader>
+              <v-flex md6 lg6>
+                <dc-multiselect v-model="prodData.mbEventInfos['CYCLE_'+prodData.prodType.prodType].mbEventAttrs.CYCLE_FREQ" :options="cycleFreq" labelDesc="结息周期" :isMultiSelect="false" :perShow="true"></dc-multiselect>
               </v-flex>
-              <v-flex md4 lg4>
-                <dc-multiselect v-model="prodData.mbEventInfos['CYCLE_'+prodData.prodType.prodType].mbEventAttrs.CYCLE_FREQ.attrValue" :options="cycleFreq" :isMultiSelect="false"></dc-multiselect>
+              <v-flex md6 lg6>
+                <dc-text-field v-model="prodData.mbEventInfos['CYCLE_'+prodData.prodType.prodType].mbEventAttrs.INT_DAY" :perShow="true" labelDesc="结息日"></dc-text-field>
               </v-flex>
-              <v-flex xs12 md2 lg2>
-                <v-subheader class="primary--text subheading">结息日*</v-subheader>
-              </v-flex>
-              <v-flex md4 lg4>
-                <dc-text-field v-model="prodData.mbEventInfos['CYCLE_'+prodData.prodType.prodType].mbEventAttrs.INT_DAY.attrValue"></dc-text-field>
-              </v-flex>
-
-              <v-flex xs12 md2 lg2>
-                <v-subheader class="primary--text subheading">是否结息到本账户*</v-subheader>
-              </v-flex>
-              <v-flex md4 lg4>
-                <dc-switch v-model="prodData.mbEventInfos['CYCLE_'+prodData.prodType.prodType].mbEventAttrs.INT_CAP.attrValue"></dc-switch>
+              <v-flex md6 lg6>
+                <dc-switch v-model="prodData.mbEventInfos['CYCLE_'+prodData.prodType.prodType].mbEventAttrs.INT_CAP" :perShow="true" labelDesc="是否结息到本账户"></dc-switch>
               </v-flex>
             </v-layout>
           </v-container>

@@ -18,6 +18,8 @@ import globalConfig from "./config.js";
 
 import 'vue-easytable/libs/themes-base/index.css'
 import 'ant-design-vue/dist/antd.css';
+import 'vuetify/dist/vuetify.min.css'
+
 // 导入 table 和 分页组件
 import {VTable,VPagination} from 'vue-easytable'
 import { Table,Divider,Tag ,Button } from 'ant-design-vue'

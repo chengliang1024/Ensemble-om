@@ -5,8 +5,8 @@
       <v-toolbar dense class="chat-history-toolbar prodLists">
         <v-text-field flat solo full-width clearable prepend-icon="search" class="top" label="请输入产品代码或描述" v-model="searchValue"></v-text-field>
       </v-toolbar>
-      <vue-perfect-scrollbar class="depositTree">
-        <v-list two-line subheader>
+      <vue-perfect-scrollbar >
+        <v-list two-line subheader :class="depositTree">
           <v-list-tile class="chat-list prodList" avatar v-for="(item, index ) in folders" :key="item.title" @click="handleClick(item)">
             <v-list-tile-avatar>
               <v-icon :class="['amber white--text']">{{ 'call_to_action'}}</v-icon>
@@ -15,11 +15,6 @@
               <v-list-tile-title>{{ item.prodType }}</v-list-tile-title>
               <v-list-tile-sub-title>{{ item.prodDesc }}</v-list-tile-sub-title>
             </v-list-tile-content>
-            <v-list-tile-action>
-              <v-btn icon ripple>
-                <v-icon color="grey lighten-1">info</v-icon>
-              </v-btn>
-            </v-list-tile-action>
           </v-list-tile>
         </v-list>
       </vue-perfect-scrollbar>
@@ -33,15 +28,21 @@
     } from '@/api/url/prodInfo'
 
     export default {
+
         props: ["prodClass"],
         data: () => ({
             folders: [],
-            prodType: ''
+            prodType: '',
+            depositTree: 'depositTree'
         }),
         watch: {
             prodClass(val) {
                 this.initProdList(val)
             }
+        },
+        mounted() {
+            this.initProdList(this._props.prodClass)
+
         },
         methods: {
             initProdList(val) {
@@ -65,5 +66,10 @@
   }
   .depositTree {
     height: calc(90vh - 48px);
+  }
+  .depositTreeFixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
   }
 </style>

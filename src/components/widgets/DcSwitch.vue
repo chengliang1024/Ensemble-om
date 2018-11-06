@@ -7,31 +7,63 @@
 */
 <template>
  <div >
-  <v-layout row wrap>
-   <v-flex md9 lg9>
-    <v-switch :label="desc" color="success" v-model="dcSwitch" @change="switchChange" hide-details :perShow="perShow"></v-switch>
+  <transition name="slide-fade">
+  <v-layout row wrap class="switch" v-if="show">
+   <v-flex md4 lg4>
+    <v-layout row wrap right>
+     <v-flex md12>
+    <v-subheader class="primary--text subheading pr-1">{{labelText}}</v-subheader>
+     </v-flex>
+    </v-layout>
    </v-flex>
-   <v-flex md3 lg3 v-if="personShow==1">
-    <v-tooltip right :color="peopleColor">
+   <v-flex md6 lg6>
+    <v-switch :label="desc" color="success" :disabled="disabled" v-model="dcSwitch" @change="switchChange" hide-details :perShow="perShow" labelDesc="labelDesc"></v-switch>
+   </v-flex>
+   <v-flex md2 lg2>
+    <v-tooltip v-if="personShow==1" right :color="peopleColor">
      <v-btn flat small :color="peopleColor" icon="people" slot="activator" class="left" @click="peopleClick">
       <v-icon>people</v-icon>
      </v-btn>
      <span>{{peopleDesc}}</span>
     </v-tooltip>
+    <dc-navbar v-if="showEdit == true"></dc-navbar>
+    <i v-if="baseAttr=='BASE'" class="material-icons baseIcon small">
+     call_merge
+    </i>
    </v-flex>
   </v-layout>
+  </transition>
  </div>
+
 </template>
 
 <script>
+    import DcNavbar from './DcNavbar'
     export default {
+        components: {
+            DcNavbar
+        },
+        model: {
+            prop: "value",
+            event: "getVue"
+        },
         props: {
             label: {
                 type: String,
                 default: "是,否"
             },
-            value: String,
-            perShow: String
+            value: {},
+            perShow: String,
+            disabled: String,
+            labelDesc: String,
+            baseAttr: {
+                type: String,
+                default: "SOLD"
+            },
+            showEdit: {
+                type: String,
+                default: false
+            }
         },
         data() {
             return {
@@ -39,57 +71,93 @@
                 peopleDesc: "产品生效",
                 currentValue: "",
                 desc: "",
+                show: false,
+                isOpen: 'lock',
                 dcSwitch: false,
-                personShow: 1
-
+                personShow: 0,
+                labelText: ''
             };
         },
         watch: {
             value: {
                 handler(val) {
-                    this.dcSwitch = val === "Y" ? true : false;
-                    this.switchChange()
+                    if(typeof val === "object"){
+                        this.dcSwitch = val.attrValue=== "Y" ? true : false
+                    }
+                    else if(typeof val === "string"){
+                        this.dcSwitch = val === "Y" ? true : false
+                    }
+                    if(typeof val !== "undefined") {
+                        this.switchChange()
+                        this.initPerson()
+                    }
                 },
                 // watch 的一个特点是，最初绑定的时候是不会执行的，要等到 value 改变时才执行监听计算
                 // 代表在wacth里声明了value这个方法之后立即先去执行handler方法
                 immediate: true
             }
-            // value(val) {
-            //   this.dcSwitch = val === "Y" ? true : false;
-            // },
-            // dcSwitch(val) {
-            //   this.$emit("input", this.currentValue);
-            // }
         },
         mounted() {
+            let t;
+            clearTimeout(t)
+            let that = this;
+            t= setTimeout(function (){
+                that.show= true
+            }, 1000);
+            if(this._props.baseAttr === "BASE"){
+                this.disabled = true
+            }else{
+                this.disabled = false
+            }
             this.switchChange();
         },
         methods: {
             peopleClick() {
+                //分户生效标识点击事件
                 if(this.peopleColor === "grey lighten-1") {
                     this.peopleColor = "red"
                     this.peopleDesc = "分户生效"
+                    //分户生效标识绑定
+                    this._props.value.perEffect = "true"
                 }else if (this.peopleColor === "red"){
+                    this.peopleColor = "grey lighten-1"
+                    this.peopleDesc = "产品生效"
+                    this._props.value.perEffect = "false"
+                }
+            },
+            initPerson() {
+                //通过组件配置的perShow参数，判断是否显示分户生效标识
+                if(this._props.perShow === true){
+                    this.personShow = 1
+                }
+                //通过产品配置的分户生效标识，初始化分户生效标志
+                if(this._props.value.perEffect === "true"){
+                    this.peopleColor = "red"
+                    this.peopleDesc = "分户生效"
+                }else{
                     this.peopleColor = "grey lighten-1"
                     this.peopleDesc = "产品生效"
                 }
             },
             switchChange() {
-                //判断是否显示分户生效标识
-                if(this._props.perShow === false){
-                    this.personShow = 0
+                if(typeof this._props.labelDesc !== "undefined") {
+                    this.labelText = this._props.labelDesc + ' :';
                 }
+                if(this._props.value !== undefined){
                 if (this.dcSwitch) {
-                    this.currentValue = "Y";
-                    this.value = "Y";
+                    if(this._props.value.attrValue !== undefined) {
+                        this._props.value.attrValue = "Y";
+                    }
                     this.desc = this.label.split(",")[0];
                 } else {
-                    this.currentValue = "N";
-                    this.value = "N";
+                    if(this._props.value.attrValue !== undefined) {
+                        this._props.value.attrValue = "N";
+                    }
                     this.desc = this.label.split(",")[1];
                 }
-                //在其 input 事件被触发时，将新的值通过自定义的 input 事件抛出
-                this.$emit("input", this.currentValue);
+                //在其 input 事件被触发时，将新的值通过自定义的 input 事件抛出（对象）
+                this.$emit("input", this._props.value);
+                }
             }
         }
     };
@@ -99,5 +167,27 @@
   margin-left: 8px;
   margin-top: 20px;
   margin-right: auto;
+ }
+ .baseIcon {
+  padding-top: 15px;
+  color: #ff110e;
+ }
+ .lock {
+  color: #ff8511;
+  padding-top: 20px;
+ }
+ .switch {
+  padding-top: 10px;
+ }
+ .slide-fade-enter-active {
+  transition: all .3s ease;
+ }
+ .slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+ }
+ .slide-fade-enter, .slide-fade-leave-to
+  /* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
  }
 </style>

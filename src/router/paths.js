@@ -1147,17 +1147,17 @@ import(
       )
   },
   {
-    path: '/getAction',
+    path: '/RbBaseProds',
     meta: {
       breadcrumb: true,
-      title: '连通后台测试'
+      title: '产品信息'
     },
-    name: 'getAction',
+    name: 'RbBaseProds',
     component: () =>
       import(
         /* webpackChunkName: "routes" */
         /* webpackMode: "lazy-once" */
-        '@/views/getAction.vue'
+        '@/views/prodFactory/prodInfo/RbBaseProds.vue'
       )
   },
   {

@@ -1,0 +1,859 @@
+{
+  "PROFIT_CENTRE": {
+    "valueMethod": "VL",
+    "columnDesc": "利润中心",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key": "99",
+        "value": "99-利润中心"
+      }
+    ]
+  },
+  "ACCT_CLASS": {
+    "valueMethod": "VL",
+    "columnDesc": "账户类别",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key": "I",
+        "value": "I-I类账户"
+      },
+      {
+        "key": "II",
+        "value": "II-II类账户"
+      },
+      {
+        "key": "III",
+        "value": "III-III类账户"
+      }
+    ]
+  },
+  "BAL_TYPE": {
+    "valueMethod": "VL",
+    "columnDesc": "余额类别",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"CA",
+        "value":"CA-钞余额"
+      }
+    ]
+  },
+  "DEPOSIT_CONTRAL_WAY": {
+    "valueMethod": "VL",
+    "columnDesc": "存入控制方式",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"N",
+        "value":"N-系统控制"
+      }
+    ]
+  },
+  "CAPITAL_ORIGIN_WAY": {
+    "valueMethod": "VL",
+    "columnDesc": "资金来源方式",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"C",
+        "value":"C-现金"
+      }
+    ]
+  },
+  "DEPOSIT_BREAK_TYPE": {
+    "valueMethod": "VL",
+    "columnDesc": "存入违约类型",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"D",
+        "value":"D-单次支取金额违约"
+      },
+      {
+        "key":"S",
+        "value":"S-起存金额违约"
+      }
+    ]
+  },
+  "BREAK_DEAL_WAY": {
+    "valueMethod": "VL",
+    "columnDesc": "违约处理方式",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"D",
+        "value":"D-拒绝"
+      }
+    ]
+  },
+  "CHECK_SG_AMT": {
+    "valueMethod": "VL",
+    "columnDesc": "单次支取金额检查",
+    "columnType": "switch"
+  },
+  "FUND_TRAN_TYPE": {
+    "valueMethod": "VL",
+    "columnDesc": "资金去向方式",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"C",
+        "value":"C-现金"
+      }
+    ]
+  },
+  "DRAW_BREAK_TYPE": {
+    "valueMethod": "VL",
+    "columnDesc": "支取违约类型",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"D",
+        "value":"D-单次支取金额违约"
+      },
+      {
+        "key":"S",
+        "value":"S-起存金额违约"
+      }
+    ]
+  },
+  "CHECK_RESTRAINT": {
+    "valueMethod": "VL",
+    "columnDesc": "账户限制处理",
+    "columnType": "switch"
+  },
+  "CHECK_INIT_AMT": {
+    "valueMethod": "VL",
+    "columnDesc": "起存金额检查",
+    "columnType": "switch"
+  },
+  "CLOSE_BACK_FLAG": {
+    "valueMethod": "VL",
+    "columnDesc": "是否允许销户回退",
+    "columnType": "switch"
+  },
+  "CHECK_WDRAWN_TYPE": {
+    "valueMethod": "VL",
+    "columnDesc": "支取方式检查",
+    "columnType": "switch"
+  },
+  "CHECK_DOC_TYPE": {
+    "valueMethod": "VL",
+    "columnDesc": "凭证类型检查",
+    "columnType": "switch"
+  },
+  "CHECK_CLOSE_FEE": {
+    "valueMethod": "VL",
+    "columnDesc": "欠费检查",
+    "columnType": "switch"
+  },
+  "CHECK_SIGN": {
+    "valueMethod": "VL",
+    "columnDesc": "签约检查",
+    "columnType": "switch"
+  },
+  "DOC_TYPE_DEAL": {
+    "valueMethod": "VL",
+    "columnDesc": "凭证类型处理",
+    "columnType": "switch"
+  },
+  "CHECK_INIT_AMT": {
+    "valueMethod": "VL",
+    "columnDesc": "单次存入金额检查",
+    "columnType": "switch"
+  },
+  "NUM_OF_CLIENT": {
+    "valueMethod": "VL",
+    "columnDesc": "同客户允许最大数",
+    "columnType": "input"
+  },
+  "SG_DEP_MIN_AMT": {
+    "valueMethod": "VL",
+    "columnDesc": "最小起存金额",
+    "columnType": "input"
+  },
+  "SG_MIN_AMT": {
+    "valueMethod": "VL",
+    "columnDesc": "最小支取金额",
+    "columnType": "input"
+  },
+  "SG_MAX_AMT": {
+    "valueMethod": "VL",
+    "columnDesc": "最大支取金额",
+    "columnType": "input"
+  },
+  "CHECK_KEEP_BAL": {
+    "valueMethod": "VL",
+    "columnDesc": "账户留存余额检查",
+    "columnType": "switch"
+  },
+  "SG_DEP_MAX_AMT": {
+    "valueMethod": "VL",
+    "columnDesc": "最大起存金额",
+    "columnType": "input"
+  },
+  "MAX_BACK_DATE_DAYS": {
+    "valueMethod": "VL",
+    "columnDesc": "最大倒起息天数",
+    "columnType": "input"
+  },
+  "KEEP_MIN_BAL": {
+    "valueMethod": "VL",
+    "columnDesc": "最小存入余额",
+    "columnType": "input"
+  },
+  "KEEP_MAX_BAL": {
+    "valueMethod": "VL",
+    "columnDesc": "最大存入余额",
+    "columnType": "input"
+  },
+  "MAX_RATE_DAYS": {
+    "valueMethod": "VL",
+    "columnDesc": "最大起息天数",
+    "columnType": "input"
+  },
+  "AGENT_FLAG": {
+    "valueMethod": "VL",
+    "columnDesc": "是否允许代办",
+    "columnType": "switch"
+  },
+  "CHECK_CLIENT_NUM_FLAG": {
+    "valueMethod": "VL",
+    "columnDesc": "同客户数检查标识",
+    "columnType": "switch"
+  },
+  "START_INT_DATE_FALG": {
+    "valueMethod": "VL",
+    "columnDesc": "起息日处理标识",
+    "columnType": "switch"
+  },
+  "WITHDRAWAL_TYPE": {
+    "valueMethod": "VL",
+    "columnDesc": "支取方式",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"B",
+        "value":"B-凭密码和印鉴"
+      },
+      {
+        "key":"O",
+        "value":"O-凭证件"
+      },
+      {
+        "key":"P",
+        "value":"P-凭密码"
+      },
+      {
+        "key":"S",
+        "value":"S-凭印鉴"
+      },
+      {
+        "key":"W",
+        "value":"W-无密码无印鉴"
+      }
+    ]
+  },
+  "CONVERT_CCY": {
+    "valueMethod": "VL",
+    "columnDesc": "折算币种",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"CNY",
+        "value":"CNY-人民币"
+      },
+      {
+        "key":"AUD",
+        "value":"AUD-澳大利亚元"
+      },
+      {
+        "key":"CAD",
+        "value":"CAD-加拿大元"
+      },
+      {
+        "key":"EUR",
+        "value":"EUR-欧元"
+      },
+      {
+        "key":"USD",
+        "value":"USD-美元"
+      },
+      {
+        "key":"GBP",
+        "value":"GBP-英镑"
+      }
+    ]
+  },
+  "ACCT_INT_FLAG": {
+    "valueMethod": "VL",
+    "columnDesc": "计息标志",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key": "00",
+        "value": "00-不计息"
+      },
+      {
+        "key": "10",
+        "value": "10-计息"
+      }
+    ]
+  },
+  "CIR_EXCHANGE_RANGE": {
+    "valueMethod": "VL",
+    "columnDesc": "通兑范围",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"0",
+        "value":"0-不允许通兑"
+      },
+      {
+        "key":"1",
+        "value":"1-全行通兑"
+      },
+      {
+        "key":"2",
+        "value":"2-分行通兑"
+      }
+    ]
+  },
+  "CLIENT_TYPE": {
+    "valueMethod": "VL",
+    "columnDesc": "客户类型",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"100",
+        "value":"100-个人"
+      },
+      {
+        "key":"200",
+        "value":"200-公司"
+      },
+      {
+        "key":"300",
+        "value":"300-同业"
+      }
+    ]
+  },
+  "INLAND_OFFSHORE": {
+    "valueMethod": "VL",
+    "columnDesc": "境内外标识",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"I",
+        "value":"I-境内"
+      },
+      {
+        "key":"O",
+        "value":"O-境外"
+      }
+    ]
+  },
+  "CLIENT_GENERAL_TYPE": {
+    "valueMethod": "VL",
+    "columnDesc": "客户子类型",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"101",
+        "value":"101-储蓄账户"
+      },
+      {
+        "key":"102",
+        "value":"102-内部员工"
+      }
+    ]
+  },
+  "CLIENT_IND": {
+    "valueMethod": "VL",
+    "columnDesc": "客户等级",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"N",
+        "value":"N-正常客户"
+      },
+      {
+        "key":"V",
+        "value":"V-VIP客户"
+      }
+    ]
+  },
+  "AGE_PART": {
+    "valueMethod": "VL",
+    "columnDesc": "年龄区间",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"down",
+        "value":"down-18岁以下"
+      },
+      {
+        "key":"between",
+        "value":"between-18岁-25岁"
+      },
+      {
+        "key":"up",
+        "value":"up-25岁-30岁"
+      }
+    ]
+  },
+  "PROFESSION": {
+    "valueMethod": "VL",
+    "columnDesc": "职业",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"0",
+        "value":"0-国家机关，党群组织，企业，事业单位"
+      },
+      {
+        "key":"1",
+        "value":"1-专业技术人员"
+      },
+      {
+        "key":"3",
+        "value":"3-办事人员和有关人员"
+      }
+    ]
+  },
+  "ADUPTER_AREA": {
+    "valueMethod": "VL",
+    "columnDesc": "适用区域",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"1",
+        "value":"1-单独区域"
+      },
+      {
+        "key":"2",
+        "value":"2-非单独区域"
+      }
+    ]
+  },
+  "AREA_TYPE": {
+    "valueMethod": "VL",
+    "columnDesc": "区域选择",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"1",
+        "value":"1-北京区域"
+      },
+      {
+        "key":"2",
+        "value":"2-上海区域"
+      }
+    ]
+  },
+  "APPLY_BRANCH": {
+    "valueMethod": "VL",
+    "columnDesc": "适用机构",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"0",
+        "value":"0-全行"
+      }
+    ]
+  },
+  "INT_DAY": {
+    "valueMethod": "VL",
+    "columnDesc": "结息日",
+    "columnType": "input"
+  },
+  "INT_CAP": {
+    "valueMethod": "VL",
+    "columnDesc": "是否结息到本账户",
+    "columnType": "switch"
+  },
+  "CYCLE_FREQ": {
+    "valueMethod": "VL",
+    "columnDesc": "结息周期",
+    "columnType": "select",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key":"2M",
+        "value":"2M-计息周期"
+      },
+      {
+        "key":"3M",
+        "value":"3M-计息周期"
+      }
+    ]
+  },
+  "CHANNEL_CHOOSE": {
+    "valueMethod": "VL",
+    "columnDesc": "渠道选择",
+    "columnType": "tree",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "columnDesc": "柜面",
+        "parentCode": "TT",
+        "parentDesc": "渠道选择",
+        "key": "MT"
+      },
+      {
+        "columnDesc": "自助渠道",
+        "parentCode": "TT",
+        "parentDesc": "渠道选择",
+        "key": "AC"
+      },
+      {
+        "columnDesc": "柜面",
+        "parentCode": "TT",
+        "parentDesc": "手机银行",
+        "key": "CP"
+      }
+    ]
+  },
+  "PROD_BRANCH": {
+    "valueMethod": "VL",
+    "columnDesc": "机构选择",
+    "columnType": "tree",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "columnDesc": "西安分行",
+        "parentCode": "9999",
+        "parentDesc": "神州总行",
+        "key": "2000"
+      },
+      {
+        "columnDesc": "北京分行",
+        "parentCode": "9999",
+        "parentDesc": "神州银行总行清算中心",
+        "key": "1000"
+      },
+      {
+        "columnDesc": "兰州分行",
+        "parentCode": "9999",
+        "parentDesc": "神州银行总行清算中心",
+        "key": "3000"
+      }
+    ]
+  },
+  "MULTI_CCY": {
+    "columnDesc": "是否多币种",
+    "columnType": "switch"
+  },
+  "CCY": {
+    "columnDesc": "币种",
+    "columnType": "select",
+    "valueMethod": "VL",
+    "isMultiSelect": false,
+    "valueScore": [
+      {
+        "key": "CNY",
+        "value": "CNY-美元"
+      },
+      {
+        "key": "AUD",
+        "value": "AUD-澳大利亚元"
+      },
+      {
+        "key": "CAD",
+        "value": "CAD-加拿大元"
+      },
+      {
+        "key": "EUR",
+        "value": "EUR-欧元"
+      },
+      {
+        "key": "USD",
+        "value": "USD-美元"
+      }
+    ]
+  },
+  "DOC_FLAG":{
+    "columnDesc":"是否多凭证",
+    "columnType":"switch"
+  },
+  "PROD_START_DATE":{
+    "columnDesc":"生效日期",
+    "columnType":"date"
+  },
+  "PROD_END_DATE":{
+    "columnDesc":"失效日期",
+    "columnType":"date"
+  },
+  "DOC_TYPE":{
+    "columnDesc":"凭证类型",
+    "columnType":"select",
+    "isMultiSelect": true,
+    "valueMethod": "VL",
+    "valueScore": [
+      {
+        "key": "001",
+        "value": "001-本外币对私存折"
+      },
+      {
+        "key": "002",
+        "value": "002-本外币对私定期存单 "
+      }
+    ]
+  },
+  "ACCT_TYPE":{
+    "columnDesc":"账户类型",
+    "columnType":"select",
+    "valueMethod": "VL",
+    "isMultiSelect": true,
+    "valueScore": [
+      {
+        "key": "A",
+        "value": "A-AIO账户"
+      },
+      {
+        "key": "C",
+        "value": "C-结算账户 "
+      },
+      {
+        "key": "S",
+        "value": "S-储蓄账户 "
+      },
+      {
+        "key": "T",
+        "value": "T-定期账户 "
+      }
+    ]
+  },
+  "FIXED_CALL":{
+    "columnDesc":"账户子类型",
+    "columnType":"select",
+    "valueMethod": "VL",
+    "isMultiSelect": true,
+    "valueScore": [
+      {
+        "key": "A",
+        "value": "A-AIO账户"
+      },
+      {
+        "key": "C",
+        "value": "C-结算账户 "
+      },
+      {
+        "key": "S",
+        "value": "S-储蓄账户 "
+      },
+      {
+        "key": "T",
+        "value": "T-定期账户 "
+      }
+    ]
+  },
+  "ACCT_NATURE":{
+    "columnDesc":"账户属性",
+    "columnType":"select",
+    "valueMethod": "VL",
+    "isMultiSelect": true,
+    "valueScore": [
+      {
+        "key": "1",
+        "value": "1-个人结算户"
+      },
+      {
+        "key": "2",
+        "value": "2-个人储蓄户"
+      }
+    ]
+  },
+  "OWNERSHIP_TYPE":{
+    "columnDesc":"关系属性",
+    "columnType":"select",
+    "valueMethod": "VL",
+    "isMultiSelect": true,
+    "valueScore": [
+      {
+        "key": "SG",
+        "value": "SG-独立账户"
+      },
+      {
+        "key": "AS",
+        "value": "AS-多联名账户"
+      },
+      {
+        "key": "SU",
+        "value": "SU-测试"
+      }
+    ]
+  },
+  "STRUCTURE_TYPE":{
+    "columnDesc":"账号生成规则",
+    "columnType":"select",
+    "valueMethod": "VL",
+    "isMultiSelect": true,
+    "valueScore": [
+      {
+        "key": "CD2",
+        "value": "CD2-账号生成规则"
+      }
+    ]
+  },
+  "ACCT_PREFIX":{
+    "columnDesc":"账号前缀",
+    "columnType":"input"
+  },
+  "AUTOMATIC_RANGE":{
+    "columnDesc":"通存范围",
+    "columnType":"select",
+    "valueMethod": "VL",
+    "isMultiSelect": true,
+    "valueScore": [
+      {
+        "key": "O",
+        "value": "0-不允许通存"
+      },
+      {
+        "key": "1",
+        "value": "1-全行通存"
+      },
+      {
+        "key": "2",
+        "value": "2-分行通存"
+      }
+    ]
+  },
+  "TRAN_CIR_EXCG_FLAG":{
+    "columnDesc":"转账通兑标识",
+    "columnType":"switch"
+  },
+  "CASH_CIR_EXCG_FLAG":{
+    "columnDesc":"现金通兑标识",
+    "columnType":"switch"
+  },
+  "CLIENT_CONTRAL_FLAG":{
+    "columnDesc":"客户控制标识",
+    "columnType":"switch"
+  },
+  "CHANNEL_CONT_FLAG":{
+    "columnDesc":"渠道控制标识",
+    "columnType":"switch"
+  },
+  "BRC_AREA_CONT_FLAG":{
+    "columnDesc":"机构区域控制",
+    "columnType":"switch"
+  },
+  "CHARGE_TYPE":{
+    "columnDesc":"收费标识",
+    "columnType":"switch"
+  },
+  "STATUS_TRAN_FLAG":{
+    "columnDesc":"状态转移标识",
+    "columnType":"switch"
+  },
+  "CHECK_ACCT_CLASS":{
+    "columnDesc":"账户类别检查",
+    "columnType":"switch",
+    "parentCode": "ACCT",
+    "parentDesc": "账户信息"
+  },
+  "CHECK_PROD_DATE":{
+    "columnDesc":"检查产品日期",
+    "columnType":"switch",
+    "parentCode": "ACCT",
+    "parentDesc": "账户信息"
+  },
+  "CHECK_MISS_NUM":{
+    "columnDesc":"漏存次数检查",
+    "columnType":"switch",
+    "parentCode": "AGREEMENT",
+    "parentDesc": "协议信息"
+  },
+  "PART_WITHDRAW_FLAG":{
+    "columnDesc":"是否允许部分提取",
+    "columnType":"switch",
+    "parentCode": "AGREEMENT",
+    "parentDesc": "协议信息"
+  },
+  "MULTI_BAL_TYPE":{
+    "columnDesc":"是否多余额",
+    "columnType":"switch",
+    "parentCode": "BALANCE",
+    "parentDesc": "余额信息"
+  },
+  "BAL_TYPE_PRIORITY":{
+    "columnDesc":"余额优先级",
+    "columnType":"input",
+    "parentCode": "BALANCE",
+    "parentDesc": "余额信息"
+  },
+  "TERM_LONG_FLAG":{
+    "columnDesc":"是否允许延期",
+    "columnType":"switch",
+    "parentCode": "FREQUCY",
+    "parentDesc": "期限信息"
+  },
+  "TERM_SHORT_FLAG":{
+    "columnDesc":"是否允许缩期",
+    "columnType":"switch",
+    "parentCode": "FREQUCY",
+    "parentDesc": "期限信息"
+  },
+  "PB_FLAG":{
+    "columnDesc":"是否带折标记",
+    "columnType":"switch",
+    "parentCode": "MEDIA",
+    "parentDesc": "介质信息"
+  },
+  "SHOW_ON_STMT":{
+    "columnDesc":"对账单标志",
+    "columnType":"switch",
+    "parentCode": "MEDIA",
+    "parentDesc": "介质信息"
+  },
+  "INIT_FLAG":{
+    "columnDesc":"起存金额控制标记",
+    "columnType":"switch",
+    "parentCode": "PRICE",
+    "parentDesc": "定价信息"
+  },
+  "TAXABLE":{
+    "columnDesc":"收税标志",
+    "columnType":"switch",
+    "parentCode": "PRICE",
+    "parentDesc": "定价信息"
+  },
+  "BACK_FLOAT_FLAG":{
+    "columnDesc":"早起息",
+    "columnType":"switch",
+    "parentCode": "RISK",
+    "parentDesc": "风险信息"
+  },
+  "CA_TRAN_FLAG":{
+    "columnDesc":"现金交易",
+    "columnType":"switch",
+    "parentCode": "RISK",
+    "parentDesc": "风险信息"
+  }
+}

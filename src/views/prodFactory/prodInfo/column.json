@@ -1,0 +1,19 @@
+{
+  "columnList": [
+    {
+      "tagCode": "baseInfo",
+      "columnCode": "PROFIT_CENTRE",
+      "index":"1"
+    },
+    {
+      "tagCode": "baseInfo",
+      "columnCode": "ACCT_INT_FLAG",
+      "index":"1"
+    },
+    {
+      "tagCode": "acctInfo",
+      "columnCode": "MULTI_CCY",
+      "index":"1"
+    }
+  ]
+}
